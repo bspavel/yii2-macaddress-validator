@@ -23,8 +23,18 @@
     AABBCCDDEEFF
 
 *Обратите внимание:*
-- Указанные выше форматы используются в реальном проекте и также являются валидными для типа данных maccaddr в PostgreSQL
+- Указанные выше форматы используются в реальном проекте и также являются валидными для типа данных maccaddr в PostgreSQL;
 - Хотя в примерах выше используются буквенные символы в верхнем регистре, на самом деле регистр не важен.
+
+### Установка
+
+В корне вашего проекта в composer.json в раздел "require" пропишите:
+    "vakorovin/yii2-macaddress-validator": "dev-master"
+и после выполните команду
+    php composer.phar install
+
+Или же выполните команду:
+    php composer.phar require --prefer-dist vakorovin/yii2-macaddress-validator "dev-master"
 
 ### Использование
 

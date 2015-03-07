@@ -1,0 +1,29 @@
+{
+	"name": "vakorovin/yii2-macaddress-validator",
+	"description": "Yii2 MAC-address validator",
+	"keywords": ["yii2", "extension", "yii2 validator", "mac", "mac-address"],
+	"homepage": "https://github.com/wbraganca/yii2-macaddress-validator",
+	"type": "yii2-extension",
+	"license": "MIT",
+	"version": "1.0.0",
+    "minimum-stability": "stable",
+	"authors": [
+		{
+			"name": "Vladimir Korovin",
+			"email": "rolan1986@gmail.com"
+		}
+	],
+	"require": {
+		"yiisoft/yii2": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"vakorovin\\yii2_macaddress_validator\\": ""
+		}
+	},
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

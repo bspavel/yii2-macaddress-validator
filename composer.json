@@ -19,5 +19,5 @@
 		"psr-4": {
 			"vakorovin\\yii2_macaddress_validator\\": ""
 		}
-	},
+	}
 }

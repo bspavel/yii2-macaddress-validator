@@ -32,7 +32,7 @@
 
     "vakorovin/yii2-macaddress-validator": "dev-master"
 
-и после выполните команду
+и после выполните команду:
 
     php composer.phar install
 

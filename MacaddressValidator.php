@@ -17,13 +17,12 @@ use Yii;
 class MacaddressValidator extends Validator
 {
 
-	public $patterns=[
+	public $patterns = [
 		'/^[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}$/i',
 		'/^[0-9a-f]{4}[\. ]{1}[0-9a-f]{4}[\. ]{1}[0-9a-f]{4}$/i',
 		'/^[0-9a-f]{6}[\-: ]{1}[0-9a-f]{6}$/i',
 		'/^[0-9a-f]{12}$/i',
 	];
-
 
     public function init()
     {
@@ -31,6 +30,17 @@ class MacaddressValidator extends Validator
         if ($this->message === null) {
             $this->message = Yii::t('yii', '{attribute} is not a valid mac-address.');
         }
+    }
+
+    public function validateAttribute($model, $attribute)
+    {
+        $result = $this->validateValue($model->$attribute);
+        if (!empty($result)) {
+            $this->addError($model, $attribute, $result[0], $result[1]);
+        } else {
+			$m = preg_replace("/[^0-9a-f]/i", "", $model->$attribute);
+			$model->$attribute = strtoupper(substr($m,0,2).':'.substr($m,2,2).':'.substr($m,4,2).':'.substr($m,6,2).':'.substr($m,8,2).':'.substr($m,10,2));
+		}
     }
 
     protected function validateValue($value)
@@ -49,11 +59,14 @@ class MacaddressValidator extends Validator
     public function clientValidateAttribute($model, $attribute, $view)
     {
 
+		$message=Yii::$app->getI18n()->format($this->message, [
+                'attribute' => $model->getAttributeLabel($attribute),
+            ], Yii::$app->language);
+
 		return "
-            var message => ".$this->message.";
+            var message='".$message."';
 
-
-			\nvar patterns=[
+			var patterns=[
 				/^[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}[\-: ]{1}[0-9a-f]{2}$/i,
 				/^[0-9a-f]{4}[\. ]{1}[0-9a-f]{4}[\. ]{1}[0-9a-f]{4}$/i,
 				/^[0-9a-f]{6}[\-: ]{1}[0-9a-f]{6}$/i,
@@ -69,7 +82,7 @@ class MacaddressValidator extends Validator
 				}
 			}
 
-			pub.addMessage(messages, message, value);
+			yii.validation.addMessage(messages, message, value);
 
 		";
 

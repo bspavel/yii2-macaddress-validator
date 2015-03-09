@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/vakorovin/yii2-macaddress-validator",
 	"type": "yii2-extension",
 	"license": "MIT",
-	"version": "1.0",
+	"version": "1.2",
 	"authors": [
 		{
 			"name": "Vladimir Korovin",
